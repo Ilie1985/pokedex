@@ -17,6 +17,11 @@
 //inside Box componenet check if pokemonData has a truthy value
 //in return JSX have a ternary operator if we have pokemonData then map over it and give me pokemons name in an <h1> ,else give me CircularProgress from material ui/core
 //set the useState to null so that we can check if it has been initialised or not because an empty array count as a truthy value
+//import Grid from material ui and replace pokemonData.map  in the ternary operator that returns the pokemons name in an <h1>.
+//So now the ternary operator will b like so: if we have pokemonData then return Grid ,else give me CircularProgress from material ui/core
+//the container property of Grid component gives a style to each element,without the containe property each element will take the entire space of the screen
+//spacing gives some space in between the elements from Grid components
+//inside Grid component return pokemos name /pokemon.name
 
 import React from "react";
 import { Box, CircularProgress } from "@material-ui/core";
@@ -24,6 +29,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { POKEMON_API_URL } from "../config/config";
 import { IMAGE_API_URL } from "../config/config";
+import { Grid } from "@material-ui/core";
 
 const Pokedex = () => {
   const [pokemonData, setPokemonData] = useState([]);
@@ -55,9 +61,11 @@ const Pokedex = () => {
   return (
     <Box>
       {pokemonData ? (
-        pokemonData.map((pokemon) => {
-          return <h1>{pokemon.name} </h1>;
-        })
+        <Grid container spacing={2}>
+          {pokemonData.map((pokemon) => {
+            return <h1 style={{ marginLeft: 10 }}>{pokemon.name}</h1>;
+          })}
+        </Grid>
       ) : (
         <CircularProgress style={{ marginTop: 100 }} />
       )}
