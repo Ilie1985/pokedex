@@ -9,6 +9,7 @@
 //style the Link
 //inside the Link put the webPage Name
 // use Typography from material ui inside the Link to put the website name
+//change the size of AppBAr with variant:h6
 
 import React from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
