@@ -13,10 +13,7 @@ export default function App() {
   return (
     <Router>
       <AppNavigator />
-
-      <Route path="/">
-        <Pokedex />
-      </Route>
+      <Route path="/" component={Pokedex} />
     </Router>
   );
 }
