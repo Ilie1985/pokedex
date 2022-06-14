@@ -30,7 +30,7 @@ import axios from "axios";
 import { POKEMON_API_URL } from "../config/config";
 import { IMAGE_API_URL } from "../config/config";
 import { Grid } from "@material-ui/core";
-
+import PokemonCard from "../components/PokemonCard";
 const Pokedex = () => {
   const [pokemonData, setPokemonData] = useState([]);
 
@@ -63,7 +63,9 @@ const Pokedex = () => {
       {pokemonData ? (
         <Grid container spacing={2}>
           {pokemonData.map((pokemon) => {
-            return <h1 style={{ marginLeft: 10 }}>{pokemon.name}</h1>;
+            return (
+              <PokemonCard pokemon ={pokemon} image={pokemon.url}/>
+            )
           })}
         </Grid>
       ) : (
