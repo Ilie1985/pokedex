@@ -9,6 +9,8 @@
 //name is destructured from pokemon right bellow the destructured props
 //i need to style the component to show the image and for that i need to import makeStyles from material -ui core ,save it in a variable useStyles
 //connect the className to the functional component with th help of useStyles function
+//give id to each child in order to stop getting the error which says that every child in alist should have a unique id
+
 import React from "react";
 import {
   Grid,
@@ -48,7 +50,7 @@ const PokemonCard = (props) => {
   const { pokemon, image } = props;
   const { id, name } = pokemon;
   return (
-    <Grid item xs={12} sm={2}>
+    <Grid item xs={12} sm={2} key={id}>
       <Card className={classes.card}>
         <CardMedia className={classes.cardMedia} image={image}></CardMedia>
         <CardContent>

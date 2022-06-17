@@ -22,18 +22,28 @@
 //the container property of Grid component gives a style to each element,without the containe property each element will take the entire space of the screen
 //spacing gives some space in between the elements from Grid components
 //inside Grid component return pokemos name /pokemon.name
+//implement makeStyles to style components/object of styles
 
 import React from "react";
-import { Box, CircularProgress } from "@material-ui/core";
+import { Box, CircularProgress, makeStyles } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { POKEMON_API_URL } from "../config/config";
 import { IMAGE_API_URL } from "../config/config";
 import { Grid } from "@material-ui/core";
 import PokemonCard from "../components/PokemonCard";
+
+const useStyles = makeStyles((theme) => ({
+  grid: {
+    textAlign: "center",
+    padding: "70px 10px 0 10px",
+    backgroundColor: "rgb(68, 68, 68)",
+  },
+}));
+
 const Pokedex = () => {
   const [pokemonData, setPokemonData] = useState([]);
-
+  const classes = useStyles();
   useEffect(() => {
     const getData = async () => {
       const res = await axios.get(`${POKEMON_API_URL}?limit=800 `);
@@ -61,11 +71,15 @@ const Pokedex = () => {
   return (
     <Box>
       {pokemonData ? (
-        <Grid container spacing={2}>
+        <Grid className={classes.grid} container spacing={2}>
           {pokemonData.map((pokemon) => {
             return (
-              <PokemonCard pokemon ={pokemon} image={pokemon.url}/>
-            )
+              <PokemonCard
+                pokemon={pokemon}
+                image={pokemon.url}
+                key={pokemon.id}
+              />
+            );
           })}
         </Grid>
       ) : (

@@ -9,7 +9,7 @@
 //style the Link
 //inside the Link put the webPage Name
 // use Typography from material ui inside the Link to put the website name
-//change the size of AppBAr with variant:h6
+//change the size of Typography with  property ->variant:h6
 
 import React from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
@@ -42,7 +42,9 @@ const AppNavigator = () => {
     <AppBar className={classes.AppBar} position="fixed">
       <Toolbar className={classes.Toolbar}>
         <Link to="/" className={classes.link}>
-          <Typography className={classes.title}>Pokedex</Typography>
+          <Typography className={classes.title} variant="h6">
+            Pokedex
+          </Typography>
         </Link>
       </Toolbar>
     </AppBar>
