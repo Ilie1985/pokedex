@@ -10,7 +10,7 @@
 //i need to style the component to show the image and for that i need to import makeStyles from material -ui core ,save it in a variable useStyles
 //connect the className to the functional component with th help of useStyles function
 //give id to each child in order to stop getting the error which says that every child in alist should have a unique id
-
+//wrap Card in a Link element so that when clicked to take us to PokemonDetails
 import React from "react";
 import {
   Grid,
@@ -20,6 +20,7 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 //============================================================
 
@@ -42,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     textAlign: "center",
   },
+  link: {
+    textDecoration: "none",
+  },
 }));
 //===================================================================
 
@@ -51,12 +55,16 @@ const PokemonCard = (props) => {
   const { id, name } = pokemon;
   return (
     <Grid item xs={12} sm={2} key={id}>
-      <Card className={classes.card}>
-        <CardMedia className={classes.cardMedia} image={image}></CardMedia>
-        <CardContent>
-          <Typography className={classes.name}>{name}</Typography>
-        </CardContent>
-      </Card>
+  
+        <Link to={"/pokemon/" + id} className={classes.link}>
+          <Card className={classes.card}>
+            <CardMedia className={classes.cardMedia} image={image}></CardMedia>
+            <CardContent>
+              <Typography className={classes.name}>{name}</Typography>
+            </CardContent>
+          </Card>
+        </Link>
+  
     </Grid>
   );
 };
