@@ -44,7 +44,8 @@ import {
   Button,
 } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
+import { toggleFavourite } from "../redux/actions";
 //====================================================================
 const styles = (theme) => ({
   title: {
@@ -136,7 +137,18 @@ class PokemonDetails extends Component {
     });
   }
 
+  favouriteChecker(pokemon) {
+    let found = false;
+    this.props.favourites?.map((p) => {
+      if (p.id === pokemon.id) {
+        found = true
+      }
+    });
+    return found;
+  }
+
   render() {
+    console.log("checke this out", this.props.favourites);
     const { classes } = this.props;
     const { pokemon } = this.state;
     // console.log("pokemon log", pokemon);
@@ -160,9 +172,15 @@ class PokemonDetails extends Component {
               <hr className={classes.separator} />
               <Grid container>
                 <Grid item md={1}>
-                  <Button className={classes.favouriteBtn}>
+                  <Button
+                    className={classes.favouriteBtn}
+                    onClick={() => this.props.toggleFavourite(pokemon)}
+                  >
                     <FavoriteIcon
-                      style={{ color: "#fff", fontSize: "40px" }}
+                      style={{
+                        color: this.favouriteChecker(pokemon) ? "red" : "white",
+                        fontSize: "40px",
+                      }}
                     ></FavoriteIcon>
                   </Button>
                   <Grid item md={2}>
@@ -208,23 +226,14 @@ class PokemonDetails extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  favorites: state.favourites
+});
 
+const mapDispatchToProps = (dispatch) => ({
+  toggleFavourite: (pokemon) => dispatch(toggleFavourite(pokemon)),
+});
 
-const mapStateToProps = (state) => ({})
-
-const mapDispatchToProps =(dispatch)=> ({
-
-})
-
-
-
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(PokemonDetails));
-
-
-
-
-
-
-
-
-
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(PokemonDetails)
+);

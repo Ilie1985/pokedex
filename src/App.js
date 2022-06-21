@@ -16,8 +16,8 @@ import { store, persistor } from "./redux/store";
 
 export default function App() {
   return (
-    <Provider store={store} persistor={persistor}>
-      <PersistGate loadng={null}>
+    <Provider store={store}>
+      <PersistGate loading={null}  persistor={persistor}>
         <Router>
           <AppNavigator />
           <Route exact path="/" component={Pokedex} />
