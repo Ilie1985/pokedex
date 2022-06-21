@@ -44,7 +44,7 @@ import {
   Button,
 } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-
+import { connect } from 'react-redux'
 //====================================================================
 const styles = (theme) => ({
   title: {
@@ -189,22 +189,6 @@ class PokemonDetails extends Component {
                     </Typography>
                   </Grid>
 
-                  {/* <Grid>
-                    {types.map((pokemonType) => {
-                      
-                      const { name } = pokemonType.type;
-
-                      return (
-                        <Grid item md={2}>
-                          <Typography className={classes.type}>
-                            Type:
-                            {name}
-                          </Typography>
-                        </Grid>
-                      );
-                    })}
-                  </Grid> */}
-
                   <Grid item md={2}>
                     <Typography className={classes.baseExperience}>
                       Base Experience :
@@ -223,4 +207,24 @@ class PokemonDetails extends Component {
     }
   }
 }
-export default withStyles(styles)(PokemonDetails);
+
+
+
+const mapStateToProps = (state) => ({})
+
+const mapDispatchToProps =(dispatch)=> ({
+
+})
+
+
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(PokemonDetails));
+
+
+
+
+
+
+
+
+

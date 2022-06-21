@@ -6,17 +6,24 @@
 //to avoid any conflict with the Route add exact property
 
 import React from "react";
+import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
 import AppNavigator from "./components/AppNavigator";
 import Pokedex from "./pages/Pokedex";
 import PokemonDetails from "./pages/PokemonDetails";
+import { store, persistor } from "./redux/store";
 
 export default function App() {
   return (
-    <Router>
-      <AppNavigator />
-      <Route exact path="/" component={Pokedex} />
-      <Route exact path="/pokemon/:id" component={PokemonDetails} />
-    </Router>
+    <Provider store={store} persistor={persistor}>
+      <PersistGate loadng={null}>
+        <Router>
+          <AppNavigator />
+          <Route exact path="/" component={Pokedex} />
+          <Route exact path="/pokemon/:id" component={PokemonDetails} />
+        </Router>
+      </PersistGate>
+    </Provider>
   );
 }
